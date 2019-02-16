@@ -4,14 +4,14 @@ import json
 
 #requesturl = "http://gondul.lan.sdok.no/api/write/switch-update"
 requesturl = 'http://192.168.1.206/api/write/switches'
-secret = 'sikkert'
+secret = 'teknisk19'
 switchtags = '["dlink","simplesnmp","new"]'
 #placement =  {"x":323,"height":100,"width":16,"y":185}
 
-swx = 240
-swy = 290
-swh = 20
-sww = 130
+sw_x = 240
+sw_y = 290
+sw_height = 20
+sw_width = 130
 
 
 base_network_v4 = ipaddress.ip_network('213.184.214.0/23')
@@ -47,15 +47,15 @@ for row in rows:
     row_count += 1
     for sw in range(row['switches']):
         sw_count += 1
-        #plassering = 'dette er:' + str(swx)
-        plassering = '{"x":' + str(swx) + ',"y":' + str(swy) + ',"height":' + str(swh) + ',"width":' + str(sww) + '}'
+        #placement = 'dette er:' + str(swx)
+        placement = '{"x":' + str(sw_x) + ',"y":' + str(sw_y) + ',"height":' + str(sw_height) + ',"width":' + str(sw_width) + '}'
         distro_name = distro[row['distro']]['name']
         port = distro[row['distro']]["port_name"].format(distro[row['distro']]["port_counter"])
         distro[row['distro']]["port_counter"] += 1
         subnet_v4 = base_subnets_v4[net_count]
         subnet_v6 = base_subnets_v6[net_count]
         name = "E{0}-{1}".format(row_count,sw_count)
-        print(name, ' - ', plassering)
+        print(name, ' - ', placement)
         #
         gw4 = ipaddress.IPv4Network(subnet_v4)[1].exploded
         gw6 = ipaddress.IPv6Network(subnet_v6)[1].exploded
@@ -63,7 +63,7 @@ for row in rows:
         switch6 = ipaddress.IPv6Network(subnet_v6)[2].exploded
 
         #data = json.dumps([{'sysname': name, 'distro_name': distro_name, 'distro_phy_port': port, 'traffic_vlan': name, 'mgmt_vlan': name, 'mgmt_v4_addr': switch4, 'mgmt_v6_addr': switch6, 'community':secret, 'tags': switchtags}])
-        data = json.dumps([{'sysname': name, 'distro_name': distro_name, 'distro_phy_port': port, 'traffic_vlan': name, 'mgmt_vlan': name, 'mgmt_v4_addr': switch4, 'mgmt_v6_addr': switch6, 'community':secret, 'placement':plassering, 'tags': switchtags}])
+        data = json.dumps([{'sysname': name, 'distro_name': distro_name, 'distro_phy_port': port, 'traffic_vlan': name, 'mgmt_vlan': name, 'mgmt_v4_addr': switch4, 'mgmt_v6_addr': switch6, 'community':secret,  'placement': placement, 'tags': switchtags}])
         r = requests.post(requesturl, data=data, headers={'content-type': 'application/json'}, auth=('tech','rules'))
         print(r.status_code, r.reason, data)
         #print('dataset1', data)
@@ -78,5 +78,5 @@ for row in rows:
         net_count += 1
         start_vlan_id += 1
         if row['switches'] == sw_count:
-          swx = 240
-    swy += 70
+          sw_x = 240
+    sw_y += 70
