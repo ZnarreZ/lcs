@@ -4,7 +4,7 @@ import json
 
 #requesturl = "http://gondul.lan.sdok.no/api/write/switch-update"
 requesturl = 'http://192.168.1.206/api/write/switches'
-secret = 'teknisk19'
+secret = 'secert'
 switchtags = '["dlink","simplesnmp","new"]'
 #placement =  {"x":323,"height":100,"width":16,"y":185}
 
