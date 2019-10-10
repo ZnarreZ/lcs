@@ -1,0 +1,8 @@
+500	wifi-clients	10.0.0.0/22	2a0b:5102:0:258::/64	natgw	Klienter på WiFi
+600	mgmt	10.1.0.0/24	2a0b:5102:0:259::/64	natgw	Misc management
+601	wifi-mgmt	10.1.1.0/24	2a0b:5102:0:25a::/64	natgw	APer
+610	core-mgmt	10.1.10.0/24	2a0b:5102:0:25b::/64	core	HP DHCP
+621	dist1-mgmt	10.1.10.0/24	2a0b:5102:0:25d::/64	dist1	HP DHCP
+622	dist2-mgmt	10.1.10.0/24	2a0b:5102:0:25e::/64	dist2	HP DHCP
+700	pve-cluster	10.1.5.0/24	2a0b:5102:0:243::/64	core	Intern proxmox cluster trafikk
+701	pve-mgmt	10.1.6.0/24	2a0b:5102:0:244::/64	natgw	Management mot proxmox nodene og ut til internett
