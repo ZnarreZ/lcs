@@ -5,16 +5,10 @@ import json
 #requesturl = "http://gondul.lan.sdok.no/api/write/switch-update"
 requesturl = 'http://localhost:8080/api/'
 secret = 'passord'
+authuser = "tech"
+authpass = "rules"
 #switchtags = ["dlink","simplesnmp","new"]
 switchtags = ["simplesnmp","new"]
-
-#sw_x_default = 1080
-#sw_x = 1080
-#sw_y = 290
-#sw_height = 20
-#sw_width = 130
-#sw_x_move = 180
-#sw_y_move = 70
 
 sw_x_default = [220,870]
 sw_y_default = [260,260]
@@ -53,12 +47,6 @@ rows = [
     {"row": 5, "switches": 2, "distro": 1},
     {"row": 6, "switches": 2, "distro": 1},
     {"row": 7, "switches": 2, "distro": 1}
-#    {"row": 1, "switches": 2, "distro": 0},
-#    {"row": 2, "switches": 3, "distro": 0},
-#    {"row": 3, "switches": 2, "distro": 0},
-#    {"row": 4, "switches": 2, "distro": 1},
-#    {"row": 5, "switches": 3, "distro": 1},
-#    {"row": 6, "switches": 2, "distro": 1}
 ]
 
 net_count = 0
@@ -85,23 +73,18 @@ for row in rows:
         switch6 = ipaddress.IPv6Network(subnet_v6)[2].exploded
         #
         data = json.dumps([{'sysname': name, 'distro_name': distro_name, 'distro_phy_port': port, 'traffic_vlan': name, 'mgmt_vlan': name, 'mgmt_v4_addr': switch4, 'mgmt_v6_addr': switch6, 'community':secret,  'placement':placement, 'tags': switchtags}])
-        r = requests.post(requesturl + 'write/switches', data=data, headers={'content-type': 'application/json'}, auth=('tech','rules'))
+        r = requests.post(requesturl + 'write/switches', data=data, headers={'content-type': 'application/json'}, auth=(authuser,authpass))
         print(r.status_code, r.reason, data)
         #
         data = json.dumps([{'name': name, 'subnet4': str(subnet_v4), 'subnet6': str(subnet_v6), 'gw4': gw4, 'gw6': gw6, 'routing_point': distro_name, 'vlan': start_vlan_id, 'tags': '["dhcp", "clients"]'}])
-        r = requests.post(requesturl + 'write/networks', data=data, headers={'content-type': 'application/json'}, auth=('tech','rules'))
+        r = requests.post(requesturl + 'write/networks', data=data, headers={'content-type': 'application/json'}, auth=(authuser,authpass))
         print(r.status_code, r.reason, data)
         #
         print("{0} - {1}:{2}, {3} - {4} - {5}".format(name, distro_name, port, subnet_v4, subnet_v6, start_vlan_id))
         #
         net_count += 1
         start_vlan_id += 1
-        #sw_x += sw_x_move
         sw_y[row['distro']] += sw_y_move[row['distro']]
         if row['switches'] == sw_count:
-          #sw_x = sw_x_default
-          sw_y[row['distro']] = sw_y_default[row['distro']]
-          #sw_x = 1080
-    #sw_y += sw_y_move
+        sw_y[row['distro']] = sw_y_default[row['distro']]
     sw_x[row['distro']] += sw_x_move[row['distro']]
-    #sw_y += 70
