@@ -86,5 +86,5 @@ for row in rows:
         start_vlan_id += 1
         sw_y[row['distro']] += sw_y_move[row['distro']]
         if row['switches'] == sw_count:
-        sw_y[row['distro']] = sw_y_default[row['distro']]
+          sw_y[row['distro']] = sw_y_default[row['distro']]
     sw_x[row['distro']] += sw_x_move[row['distro']]
