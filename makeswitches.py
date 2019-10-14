@@ -10,10 +10,12 @@ authpass = "rules"
 #switchtags = ["dlink","simplesnmp","new"]
 switchtags = ["simplesnmp","new"]
 
-sw_x_default = [220,870]
+#sw_x_default = [220,870]
+sw_x_default = [220,692]
 sw_y_default = [260,260]
 
-sw_x = [220,870]
+#sw_x = [220,870]
+sw_x = [220,692]
 sw_y = [260,260]
 
 sw_height = 130
@@ -43,7 +45,8 @@ rows = [
     {"row": 1, "switches": 2, "distro": 0},
     {"row": 2, "switches": 2, "distro": 0},
     {"row": 3, "switches": 2, "distro": 0},
-    {"row": 4, "switches": 2, "distro": 0},
+#    {"row": 4, "switches": 2, "distro": 0},
+    {"row": 4, "switches": 2, "distro": 1},
     {"row": 5, "switches": 2, "distro": 1},
     {"row": 6, "switches": 2, "distro": 1},
     {"row": 7, "switches": 2, "distro": 1}
