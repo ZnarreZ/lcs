@@ -9,11 +9,11 @@ authpass = 'rules'
 equipmenttags = [""]
 
 equipments = [
-    {"name": "distro1", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"width":130,"height":20,"y":875,"x":319}},
-    {"name": "distro2", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"width":130,"height":20,"y":865,"x":993}},
-    {"name": "webcam", "distro_name": " " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"width":80,"height":80,"y":930,"x":24}},
-    {"name": "core", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":640,"y":969,"width":130,"height":20}},
-    {"name": "natgw", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":640,"y":989,"width":130,"height":20}}
+    {"name": "distro1", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"height":130,"y":677,"width":20,"x":1184}},
+    {"name": "distro2", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1185,"y":206,"width":20,"height":130}},
+    {"name": "webcam", "distro_name": " " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"height":80,"y":911,"width":80,"x":1821}},
+    {"name": "core", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"height":20,"x":1130,"y":983,"width":130}},
+    {"name": "natgw", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1130,"width":130,"y":1006,"height":20}}
 ]
 
 for device in equipments:

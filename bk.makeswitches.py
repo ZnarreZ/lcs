@@ -11,22 +11,18 @@ authpass = "rules"
 switchtags = ["simplesnmp","new"]
 
 #sw_x_default = [220,870]
-sw_x_default = [1310,1310]
-sw_y_default = [900,420]
+sw_x_default = [220,692]
+sw_y_default = [260,260]
 
 #sw_x = [220,870]
-#sw_x = [1310,1610]
-sw_x = [1310,1310]
-#sw_y = [900,735]
-sw_y = [900,420]
+sw_x = [220,692]
+sw_y = [260,260]
 
-sw_height = 20
-sw_width = 130
+sw_height = 130
+sw_width = 20
 
-#sw_x_move = [154,178]
-#sw_y_move = [380,380]
-sw_x_move = [300,300]
-sw_y_move = [-160,-160]
+sw_x_move = [154,178]
+sw_y_move = [380,380]
 
 
 base_network_v4 = ipaddress.ip_network('10.100.0.0/23')
@@ -52,7 +48,8 @@ rows = [
 #    {"row": 4, "switches": 2, "distro": 0},
     {"row": 4, "switches": 2, "distro": 1},
     {"row": 5, "switches": 2, "distro": 1},
-    {"row": 6, "switches": 2, "distro": 1}
+    {"row": 6, "switches": 2, "distro": 1},
+    {"row": 7, "switches": 2, "distro": 1}
 ]
 
 net_count = 0
@@ -90,11 +87,7 @@ for row in rows:
         #
         net_count += 1
         start_vlan_id += 1
-        sw_x[row['distro']] += sw_x_move[row['distro']]
+        sw_y[row['distro']] += sw_y_move[row['distro']]
         if row['switches'] == sw_count:
-          sw_x[row['distro']] = sw_x_default[row['distro']]
-    sw_y[row['distro']] += sw_y_move[row['distro']]
-    #    sw_y[row['distro']] += sw_y_move[row['distro']]
-    #    if row['switches'] == sw_count:
-    #      sw_y[row['distro']] = sw_y_default[row['distro']]
-    #sw_x[row['distro']] += sw_x_move[row['distro']]
+          sw_y[row['distro']] = sw_y_default[row['distro']]
+    sw_x[row['distro']] += sw_x_move[row['distro']]
