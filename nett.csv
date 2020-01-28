@@ -1,8 +1,17 @@
-500	wifi-clients	10.0.0.0/22	2a0b:5102:0:258::/64	natgw	Klienter på WiFi
-600	mgmt	10.1.0.0/24	2a0b:5102:0:259::/64	natgw	Misc management
-601	wifi-mgmt	10.1.1.0/24	2a0b:5102:0:25a::/64	natgw	APer
-610	core-mgmt	10.1.10.0/24	2a0b:5102:0:25b::/64	core	HP DHCP
-621	dist1-mgmt	10.1.10.0/24	2a0b:5102:0:25d::/64	dist1	HP DHCP
-622	dist2-mgmt	10.1.10.0/24	2a0b:5102:0:25e::/64	dist2	HP DHCP
+500	wifi-clients	10.0.0.0/22	2a0b:5102:0:258::/64	fw	Klienter på WiFi
+510	stream	10.0.4.0/24	2a0b:5102:0:218::/64	fw	stream nat stuff
+600	mgmt	10.1.0.0/24	2a0b:5102:0:259::/64	fw	Misc management
+601	wifi-mgmt	10.1.1.0/24	2a0b:5102:0:25a::/64	fw	APer
+610	galgw-mgmt	10.1.2.0/24	2a0b:5102:0:25b::/64	galgw	HP DHCP
+611	crewgw-mgmt	10.1.3.0/24	2a0b:5102:0:25c::/64	crewgw	HP DHCP
+621	distro1-mgmt	10.1.21.0/24	2a0b:5102:0:25d::/64	distro1	HP DHCP
+622	distro2-mgmt	10.1.22.0/24	2a0b:5102:0:25e::/64	distro2	HP DHCP
 700	pve-cluster	10.1.5.0/24	2a0b:5102:0:243::/64	core	Intern proxmox cluster trafikk
-701	pve-mgmt	10.1.6.0/24	2a0b:5102:0:244::/64	natgw	Management mot proxmox nodene og ut til internett
+701	pve-mgmt	10.1.6.0/24	2a0b:5102:0:244::/64	fw	Management mot proxmox nodene og ut til internett
+305	Scene	213.184.213.32/27	2a0b:5102:0:225::/64	crewgw	
+301	Crew1	213.184.213.64/28	2a0b:5102:0:221::/64	crewgw	
+302	Crew2	213.184.213.80/28	2a0b:5102:0:222::/64	crewgw	
+303	Crew3	213.184.213.96/28	2a0b:5102:0:223::/64	crewgw	
+304	Crew4	213.184.213.112/28	2a0b:5102:0:224::/64	crewgw	ole-sw
+400	srv	213.184.213.192/27	2a0b:5102:0:241::/64	core	Servere
+401	tech-srv	213.184.213.224/28	2a0b:5102:0:242::/64	core	Servere som er kritiske for leveransen (dhcp, dns, ++)

@@ -9,11 +9,17 @@ authpass = 'rules'
 equipmenttags = [""]
 
 equipments = [
-    {"name": "distro1", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"height":130,"y":677,"width":20,"x":1184}},
-    {"name": "distro2", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1185,"y":206,"width":20,"height":130}},
-    {"name": "webcam", "distro_name": " " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"height":80,"y":911,"width":80,"x":1821}},
-    {"name": "core", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"height":20,"x":1130,"y":983,"width":130}},
-    {"name": "natgw", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1130,"width":130,"y":1006,"height":20}}
+    {"name": "distro1", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"width":20,"height":130,"y":360,"x":715}},
+    {"name": "distro2", "distro_name":"core" ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"width":20,"height":130,"y":495,"x":830}},
+    {"name": "webcam", "distro_name": " " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"width":80,"height":80,"y":930,"x":24}},
+    {"name": "core", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":640,"y":969,"width":130,"height":20}},
+    {"name": "crewgw", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1522,"y":99,"width":20,"height":130}},
+    {"name": "olesw", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":920,"y":134,"width":130,"height":20}},
+    {"name": "crew1", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1222,"y":134,"width":130,"height":20}},
+    {"name": "crew2", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1640,"y":60,"width":130,"height":20}},
+    {"name": "crew3", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1700,"y":222,"width":130,"height":20}},
+    {"name": "scene1", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1740,"y":288,"width":20,"height":130}},
+    {"name": "scene2", "distro_name":" " ,"port_name": "ge-0/0/{0}", "port_counter": 0, "placement": {"x":1740,"y":732,"width":20,"height":130}}
 ]
 
 for device in equipments:
