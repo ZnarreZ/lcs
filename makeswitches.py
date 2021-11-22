@@ -1,30 +1,36 @@
+import os
 import ipaddress
 import requests
 import json
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
 #requesturl = "http://gondul.lan.sdok.no/api/write/switch-update"
 requesturl = 'http://localhost:8080/api/'
-secret = 'passord'
-authuser = "tech"
-authpass = "rules"
+secret = os.getenv('secret')
+authuser = os.getenv('authuser')
+authpass = os.getenv('authpass')
 #switchtags = ["dlink","simplesnmp","new"]
 switchtags = ["simplesnmp","new"]
 
 #sw_x_default = [220,870]
-sw_x_default = [260,967]
+sw_x_default = [270,1210]
 #sw_y_default = [147,147]
-sw_y_default = [147,280]
+sw_y_default = [290,290]
 
 #sw_x = [220,870]
-sw_x = [260,967]
-sw_y = [147,280]
+sw_x = [270,1210]
+sw_y = [290,290]
 #sw_y = [147,147]
 
 sw_height = 20
 sw_width = 130
 
-sw_x_move = [260,0]
-sw_y_move = [133,133]
+sw_x_move = [330,0]
+sw_y_move = [197,197]
 
 base_network_v4 = ipaddress.ip_network('213.184.212.0/21', strict=False)
 subnet_size_v4 = 27
@@ -36,23 +42,27 @@ base_subnets_v6 = list(base_network_v6.subnets(new_prefix=subnet_size_v6))
 
 
 start_vlan_id = 200
-distros = [
+distro = [
     {"name": "distro1", "port_name": "ge-0/0/{0}", "port_counter": 0, "mgmt_v4": ipaddress.IPv4Address('10.1.21.10')},
     {"name": "distro2", "port_name": "ge-0/0/{0}", "port_counter": 0, "mgmt_v4": ipaddress.IPv4Address('10.1.22.10')}
 ]
 
 rows = [
-    {"row": 1, "switches": 2},
-    {"row": 2, "switches": 3},
-    {"row": 3, "switches": 3},
-    {"row": 4, "switches": 3},
-    {"row": 5, "switches": 3},
-    {"row": 6, "switches": 3}
+    {"row": 1, "switches": 2, "distro": 0},
+    {"row": 2, "switches": 2, "distro": 0},
+    {"row": 3, "switches": 2, "distro": 0},
+    {"row": 4, "switches": 2, "distro": 0},
+    {"row": 5, "switches": 1, "distro": 1},
+    {"row": 6, "switches": 1, "distro": 1},
+    {"row": 7, "switches": 1, "distro": 1},
+    {"row": 8, "switches": 1, "distro": 1}
+
 ]
 
 net_count_v4 = 0
 net_count = 0
 row_count = 0
+
 firstvalidip = ipaddress.ip_network('213.184.213.128/27')
 lastvalidip = ipaddress.ip_network('213.184.213.192/27')
 validrange = ipaddress.ip_network('213.184.214.0/23')
@@ -67,17 +77,14 @@ for row in rows:
             net_count_v4 += 1
         sw_count += 1
         #
-        distro = 0
-        if (sw == 2):
-          distro = 1
-        placement = {"x": sw_x[distro], "y":sw_y[0], "height":sw_height,"width":sw_width }
-        distro_name = distros[distro]['name']
-        port = distros[distro]["port_name"].format(distros[distro]["port_counter"])
-        distros[distro]["port_counter"] += 1
-        subnet_v4 = base_subnets_v4[net_count_v4]
+        placement = {"x": sw_x[row['distro']], "y":sw_y[row['distro']], "height":sw_height,"width":sw_width }
+        distro_name = distro[row['distro']]['name']
+        port = distro[row['distro']]["port_name"].format(distro[row['distro']]["port_counter"])
+        distro[row['distro']]["port_counter"] += 1
+        subnet_v4 = base_subnets_v4[net_count]
         subnet_v6 = base_subnets_v6[net_count]
         name = "E{0}-{1}".format(row_count,sw_count)
-        print(name, ' - ', placement, ' - distro:', distro)
+        print(name, ' - ', placement)
         #
         gw4 = ipaddress.IPv4Network(subnet_v4)[1].exploded
         gw6 = ipaddress.IPv6Network(subnet_v6)[1].exploded
@@ -92,13 +99,12 @@ for row in rows:
         r = requests.post(requesturl + 'write/networks', data=data, headers={'content-type': 'application/json'}, auth=(authuser,authpass))
         print(r.status_code, r.reason, data)
         #
-        print("{0} - {1}:{2}, {3} - {4} - {5} - {6}".format(name, distro_name, port, subnet_v4, subnet_v6, start_vlan_id, (distros[distro]["mgmt_v4"])))
+        print("{0} - {1}:{2}, {3} - {4} - {5}".format(name, distro_name, port, subnet_v4, subnet_v6, start_vlan_id))
         #
         net_count += 1
         net_count_v4 += 1
         start_vlan_id += 1
-        distros[distro]["mgmt_v4"] += 1
-        sw_x[distro] += sw_x_move[distro]
+        sw_x[row['distro']] += sw_x_move[row['distro']]
         if row['switches'] == sw_count:
-          sw_x[0] = sw_x_default[0]
-    sw_y[0] += sw_y_move[0]
+          sw_x[row['distro']] = sw_x_default[row['distro']]
+    sw_y[row['distro']] += sw_y_move[row['distro']]
