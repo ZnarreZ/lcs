@@ -11,6 +11,13 @@ secret = os.getenv('secret')
 authuser = os.getenv('authuser')
 authpass = os.getenv('authpass')
 
+
+if not ('authuser' in locals()):
+  print('Mangler mellom annet authuser! - PANIC!!')
+  exit()
+
+
+
 equipmenttags = [""]
 
 equipments = [

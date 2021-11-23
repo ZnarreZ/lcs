@@ -13,6 +13,15 @@ requesturl = 'http://localhost:8080/api/'
 secret = os.getenv('secret')
 authuser = os.getenv('authuser')
 authpass = os.getenv('authpass')
+
+
+
+if not ('authuser' in locals()):
+  print('Mangler mellom annet authuser! - PANIC!!')
+  exit()
+
+
+
 #switchtags = ["dlink","simplesnmp","new"]
 switchtags = ["simplesnmp","new"]
 
