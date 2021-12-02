@@ -14,6 +14,7 @@ authpass = os.getenv('authpass')
 
 if not ('authuser' in locals()):
   print('Mangler mellom annet authuser! - PANIC!!')
+  print('Sjekk om .env er laget?')
   exit()
 
 
